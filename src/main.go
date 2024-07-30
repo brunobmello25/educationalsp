@@ -39,7 +39,16 @@ func handleMessage(logger *log.Logger, method string, contents []byte) {
 		if err := json.Unmarshal(contents, &request); err != nil {
 			logger.Printf("Error when parsing msg: %s", err)
 		}
+
 		logger.Printf("Connected to %s %s", request.Params.ClientInfo.Name, request.Params.ClientInfo.Version)
+
+		msg := lsp.NewInitializeResponse(request.ID)
+		reply := rpc.EncodeMessage(msg)
+
+		writer := os.Stdout
+		writer.Write([]byte(reply))
+
+		logger.Println("sent the reply")
 	}
 }
 
