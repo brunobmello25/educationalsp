@@ -17,3 +17,11 @@ func TestEncodeMessage(t *testing.T) {
 
 	assert.Equal(t, expected, actual)
 }
+
+func TestDecodeMessage(t *testing.T) {
+	incomingMessage := "Content-Length: 16\r\n\r\n{\"Testing\":true}"
+	contentLength, err := rpc.Decodemessage([]byte(incomingMessage))
+
+	assert.NoError(t, err)
+	assert.Equal(t, 16, contentLength)
+}
