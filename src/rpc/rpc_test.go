@@ -20,7 +20,8 @@ func TestEncodeMessage(t *testing.T) {
 
 func TestDecodeMessage(t *testing.T) {
 	incomingMessage := "Content-Length: 15\r\n\r\n{\"Method\":\"hi\"}"
-	method, contentLength, err := rpc.Decodemessage([]byte(incomingMessage))
+	method, content, err := rpc.DecodeMessage([]byte(incomingMessage))
+	contentLength := len(content)
 
 	assert.NoError(t, err)
 	assert.Equal(t, 15, contentLength)
