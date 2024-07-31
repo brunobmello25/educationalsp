@@ -127,3 +127,23 @@ func LineRange(row int, start int, end int) lsp.Range {
 		},
 	}
 }
+
+func (s *State) TextDocumentCompletion(id int) lsp.CompletionResponse {
+	items := []lsp.CompletionItem{
+		{
+			Label:         "Neovim (BTW)",
+			Detail:        "Very cool editor",
+			Documentation: "I like it",
+		},
+	}
+
+	response := lsp.CompletionResponse{
+		Response: lsp.Response{
+			RPC: "2.0",
+			ID:  &id,
+		},
+		Result: items,
+	}
+
+	return response
+}
